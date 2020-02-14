@@ -5,10 +5,18 @@
  */
 package PatternMediator.resources.classes.CargoSectors;
 
+import PatternMediator.resources.interfaces.CargoSector;
+import PatternMediator.resources.enums.CargoSectorTypes;
+
 /**
  *
  * @author comrade
  */
-public class DefaultSector {
+public class DefaultSector extends AbstractCargoSector implements CargoSector {
+
+    public DefaultSector(Integer space){
+        super(space,CargoSectorTypes.Default);
+    }
+
     
 }

@@ -5,10 +5,12 @@
  */
 package PatternMediator.resources.classes.Airships;
 
+import PatternMediator.resources.interfaces.Airship;
+
 /**
  *
  * @author comrade
  */
-public class MillenniumFalcon {
+public class MillenniumFalcon extends AbstractAirship implements Airship{
     
 }

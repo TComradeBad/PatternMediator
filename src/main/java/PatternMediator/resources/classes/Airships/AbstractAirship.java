@@ -5,10 +5,24 @@
  */
 package PatternMediator.resources.classes.Airships;
 
+import PatternMediator.resources.interfaces.Airship;
+import PatternMediator.resources.interfaces.CargoSector;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 /**
  *
  * @author comrade
  */
-public class AbstractAirship {
-    
+public class AbstractAirship implements Airship {
+
+    private List<CargoSector> sectors;
+
+    public AbstractAirship(CargoSector... sectors) {
+        this.sectors = new ArrayList<>();
+
+        this.sectors.addAll(Arrays.asList(sectors));
+    }
 }

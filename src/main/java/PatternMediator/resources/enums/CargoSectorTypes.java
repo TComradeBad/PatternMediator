@@ -5,10 +5,16 @@
  */
 package PatternMediator.resources.enums;
 
+
+
 /**
  *
  * @author comrade
  */
 public enum CargoSectorTypes {
+
+    Default,
+    Germetic,
+    TemperatureControl,
     
 }

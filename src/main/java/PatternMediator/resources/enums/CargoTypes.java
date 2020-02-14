@@ -11,4 +11,8 @@ package PatternMediator.resources.enums;
  */
 public enum CargoTypes {
     
+    Default,
+    Danger,
+    Living,
+    Perishable,
 }

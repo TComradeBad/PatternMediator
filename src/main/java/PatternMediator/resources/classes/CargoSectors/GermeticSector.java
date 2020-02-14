@@ -5,10 +5,16 @@
  */
 package PatternMediator.resources.classes.CargoSectors;
 
+import PatternMediator.resources.enums.CargoSectorTypes;
+import PatternMediator.resources.interfaces.CargoSector;
+
 /**
  *
  * @author comrade
  */
-public class GermeticSector {
+public class GermeticSector extends AbstractCargoSector implements CargoSector{
     
+    public GermeticSector(Integer space){
+        super(space, CargoSectorTypes.Germetic);
+    }
 }

@@ -5,10 +5,12 @@
  */
 package PatternMediator.resources.classes.Airships;
 
+import PatternMediator.resources.interfaces.Airship;
+
 /**
  *
  * @author comrade
  */
-public class Tardis {
+public class Tardis extends AbstractAirship implements Airship{
     
 }

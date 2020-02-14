@@ -5,10 +5,12 @@
  */
 package PatternMediator.resources.classes.Airships;
 
+import PatternMediator.resources.interfaces.Airship;
+
 /**
  *
  * @author comrade
  */
-public class ConwingL16 {
+public class ConwingL16 extends AbstractAirship implements Airship{
     
 }
