@@ -5,12 +5,24 @@
  */
 package PatternMediator.resources.classes.Airships;
 
+import PatternMediator.resources.classes.CargoSectors.DefaultSector;
+import PatternMediator.resources.classes.CargoSectors.GermeticSector;
+import PatternMediator.resources.classes.CargoSectors.TemperatureControlSector;
+import PatternMediator.resources.interfaces.Airport;
 import PatternMediator.resources.interfaces.Airship;
 
 /**
  *
  * @author comrade
  */
-public class Tardis extends AbstractAirship implements Airship{
-    
+public class Tardis extends AbstractAirship implements Airship {
+
+    public Tardis(Airport destination) {
+        super(
+                destination,
+                new DefaultSector(9999),
+                new GermeticSector(9999),
+                new TemperatureControlSector(9999)
+        );
+    }
 }

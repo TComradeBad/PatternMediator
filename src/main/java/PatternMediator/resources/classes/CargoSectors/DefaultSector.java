@@ -7,6 +7,8 @@ package PatternMediator.resources.classes.CargoSectors;
 
 import PatternMediator.resources.interfaces.CargoSector;
 import PatternMediator.resources.enums.CargoSectorTypes;
+import PatternMediator.resources.enums.CargoTypes;
+import PatternMediator.resources.interfaces.Cargo;
 
 /**
  *
@@ -14,9 +16,20 @@ import PatternMediator.resources.enums.CargoSectorTypes;
  */
 public class DefaultSector extends AbstractCargoSector implements CargoSector {
 
-    public DefaultSector(Integer space){
-        super(space,CargoSectorTypes.Default);
+    public DefaultSector(Integer space) {
+        super(space, CargoSectorTypes.Default);
     }
 
-    
+    /**
+     * Check cargo type
+     *
+     * @param cargo
+     * @return
+     */
+    @Override
+    public boolean checkCargo(Cargo cargo) {
+
+        return true;
+    }
+
 }

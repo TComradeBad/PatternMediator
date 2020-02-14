@@ -5,10 +5,21 @@
  */
 package PatternMediator.resources.interfaces;
 
+import PatternMediator.resources.enums.CargoSectorTypes;
+
 /**
  *
  * @author comrade
  */
 public interface CargoSector {
     
-}
+    public CargoSectorTypes getCargoSectorType();
+    
+    public boolean loadCargo(Cargo cargo);
+    
+    public Integer getTotalSpace();
+    
+    public Integer getUsedSpace();
+    
+    public boolean checkCargo(Cargo cargo);
+} 

@@ -6,15 +6,16 @@
 package PatternMediator.resources.classes.Cargos;
 
 import PatternMediator.resources.enums.CargoTypes;
+import PatternMediator.resources.interfaces.Airport;
 import PatternMediator.resources.interfaces.Cargo;
 
 /**
  *
  * @author comrade
  */
-public class DefaultCargo extends AbstractCargo implements Cargo{
-    
-    public DefaultCargo(){
-        super(CargoTypes.Default);
+public class DefaultCargo extends AbstractCargo implements Cargo {
+
+    public DefaultCargo(Airport destination, Integer size) {
+        super(CargoTypes.Default, size, destination);
     }
 }

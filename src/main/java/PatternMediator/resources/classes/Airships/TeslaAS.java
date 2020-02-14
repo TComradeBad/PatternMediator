@@ -5,12 +5,22 @@
  */
 package PatternMediator.resources.classes.Airships;
 
+import PatternMediator.resources.classes.CargoSectors.GermeticSector;
+import PatternMediator.resources.classes.CargoSectors.TemperatureControlSector;
+import PatternMediator.resources.interfaces.Airport;
 import PatternMediator.resources.interfaces.Airship;
 
 /**
  *
  * @author comrade
  */
-public class TeslaAS extends AbstractAirship implements Airship{
-    
+public class TeslaAS extends AbstractAirship implements Airship {
+
+    public TeslaAS(Airport destination) {
+        super(
+                destination,
+                new GermeticSector(5),
+                new TemperatureControlSector(40)
+        );
+    }
 }

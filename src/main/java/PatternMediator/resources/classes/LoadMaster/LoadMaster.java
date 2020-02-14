@@ -3,17 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PatternMediator.resources.interfaces;
+package PatternMediator.resources.classes.LoadMaster;
+
+import PatternMediator.resources.interfaces.Mediator;
 
 /**
  *
  * @author comrade
  */
-public interface Airship {
-    
-    public void loadCargo(Cargo cargo);
-    
-    public Airport getDestination();
-    
+public class LoadMaster implements Mediator{
     
 }

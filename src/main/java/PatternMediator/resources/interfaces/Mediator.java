@@ -5,17 +5,10 @@
  */
 package PatternMediator.resources.interfaces;
 
-import PatternMediator.resources.enums.CargoTypes;
-
 /**
  *
  * @author comrade
  */
-public interface Cargo {
+public interface Mediator {
     
-    public CargoTypes getCargoType();
-    
-    public Integer getCargoSize();
-    
-    public Airport getDestination();
 }
