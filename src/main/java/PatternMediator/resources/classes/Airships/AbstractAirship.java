@@ -9,9 +9,9 @@ import PatternMediator.resources.interfaces.Airport;
 import PatternMediator.resources.interfaces.Airship;
 import PatternMediator.resources.interfaces.Cargo;
 import PatternMediator.resources.interfaces.CargoSector;
+import PatternMediator.resources.interfaces.Mediator;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import java.util.List;
 
 /**
@@ -24,6 +24,12 @@ public abstract class AbstractAirship implements Airship {
      * Destination of airship
      */
     private final Airport destination;
+
+    /**
+     * Current Mediator
+     */
+    private final Mediator mediator;
+
     /**
      * Sectors of Airship
      */
@@ -35,8 +41,9 @@ public abstract class AbstractAirship implements Airship {
      * @param destination
      * @param sectors
      */
-    public AbstractAirship(Airport destination, CargoSector... sectors) {
+    public AbstractAirship(Mediator mediator, Airport destination, CargoSector... sectors) {
         this.destination = destination;
+        this.mediator = mediator;
         this.sectors = new ArrayList<>();
         this.sectors.addAll(Arrays.asList(sectors));
     }

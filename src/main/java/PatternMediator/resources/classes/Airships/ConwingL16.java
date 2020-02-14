@@ -8,6 +8,7 @@ package PatternMediator.resources.classes.Airships;
 import PatternMediator.resources.classes.CargoSectors.DefaultSector;
 import PatternMediator.resources.interfaces.Airport;
 import PatternMediator.resources.interfaces.Airship;
+import PatternMediator.resources.interfaces.Mediator;
 
 /**
  *
@@ -15,7 +16,7 @@ import PatternMediator.resources.interfaces.Airship;
  */
 public class ConwingL16 extends AbstractAirship implements Airship {
 
-    public ConwingL16(Airport destination) {
-        super(destination, new DefaultSector(6));
+    public ConwingL16(Mediator mediator, Airport destination) {
+        super(mediator, destination, new DefaultSector(6));
     }
 }

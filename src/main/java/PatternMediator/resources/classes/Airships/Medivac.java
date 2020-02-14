@@ -8,6 +8,7 @@ package PatternMediator.resources.classes.Airships;
 import PatternMediator.resources.classes.CargoSectors.GermeticSector;
 import PatternMediator.resources.interfaces.Airport;
 import PatternMediator.resources.interfaces.Airship;
+import PatternMediator.resources.interfaces.Mediator;
 
 /**
  *
@@ -15,8 +16,9 @@ import PatternMediator.resources.interfaces.Airship;
  */
 public class Medivac extends AbstractAirship implements Airship {
 
-    public Medivac(Airport destination) {
+    public Medivac(Mediator mediator,Airport destination) {
         super(
+                mediator,
                 destination,
                 new GermeticSector(12)
         );

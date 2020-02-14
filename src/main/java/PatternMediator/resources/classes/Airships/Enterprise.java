@@ -9,6 +9,7 @@ import PatternMediator.resources.classes.CargoSectors.GermeticSector;
 import PatternMediator.resources.classes.CargoSectors.TemperatureControlSector;
 import PatternMediator.resources.interfaces.Airport;
 import PatternMediator.resources.interfaces.Airship;
+import PatternMediator.resources.interfaces.Mediator;
 
 /**
  *
@@ -16,8 +17,9 @@ import PatternMediator.resources.interfaces.Airship;
  */
 public class Enterprise extends AbstractAirship implements Airship {
 
-    public Enterprise(Airport destination) {
+    public Enterprise(Mediator mediator, Airport destination) {
         super(
+                mediator,
                 destination,
                 new TemperatureControlSector(20),
                 new GermeticSector(30)

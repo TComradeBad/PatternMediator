@@ -10,6 +10,7 @@ import PatternMediator.resources.classes.CargoSectors.GermeticSector;
 import PatternMediator.resources.classes.CargoSectors.TemperatureControlSector;
 import PatternMediator.resources.interfaces.Airport;
 import PatternMediator.resources.interfaces.Airship;
+import PatternMediator.resources.interfaces.Mediator;
 
 /**
  *
@@ -17,8 +18,9 @@ import PatternMediator.resources.interfaces.Airship;
  */
 public class MillenniumFalcon extends AbstractAirship implements Airship {
 
-    public MillenniumFalcon(Airport destination) {
+    public MillenniumFalcon(Mediator mediator, Airport destination) {
         super(
+                mediator,
                 destination,
                 new GermeticSector(5),
                 new TemperatureControlSector(10),
