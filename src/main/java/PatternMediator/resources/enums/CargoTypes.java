@@ -10,9 +10,19 @@ package PatternMediator.resources.enums;
  * @author comrade
  */
 public enum CargoTypes {
-    
-    Default,
-    Danger,
-    Living,
-    Perishable,
+
+    Living(4),
+    Perishable(3),
+    Danger(2),
+    Default(1);
+
+    private Integer priority;
+
+    public Integer getPriority() {
+        return this.priority;
+    }
+
+    CargoTypes(Integer priority) {
+        this.priority = priority;
+    }
 }

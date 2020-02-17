@@ -7,7 +7,6 @@ package PatternMediator.resources.classes.Airships;
 
 import PatternMediator.resources.interfaces.Airport;
 import PatternMediator.resources.interfaces.Airship;
-import PatternMediator.resources.interfaces.Cargo;
 import PatternMediator.resources.interfaces.CargoSector;
 import PatternMediator.resources.interfaces.Mediator;
 import java.util.ArrayList;
@@ -49,25 +48,6 @@ public abstract class AbstractAirship implements Airship {
     }
 
     /**
-     * Load cargo in one of the Airship sectors
-     *
-     * @param cargo
-     */
-    @Override
-    public void loadCargo(Cargo cargo) {
-
-        for (CargoSector sector : this.sectors) {
-
-            if (sector.checkCargo(cargo)) {
-                sector.loadCargo(cargo);
-                break;
-            }
-
-        }
-
-    }
-
-    /**
      * Getter for airship destination;
      *
      * @return
@@ -75,6 +55,15 @@ public abstract class AbstractAirship implements Airship {
     @Override
     public Airport getDestination() {
         return this.destination;
+    }
+
+    /**
+     * Get Sectors of airship
+     *
+     * @return
+     */
+    public List<CargoSector> getSectors() {
+        return this.sectors;
     }
 
 }

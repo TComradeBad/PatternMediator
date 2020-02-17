@@ -5,15 +5,16 @@
  */
 package PatternMediator.resources.interfaces;
 
+import java.util.List;
+
 /**
  *
  * @author comrade
  */
 public interface Airship {
-    
-    public void loadCargo(Cargo cargo);
-    
+
     public Airport getDestination();
-    
-    
+
+    public List<CargoSector> getSectors();
+
 }

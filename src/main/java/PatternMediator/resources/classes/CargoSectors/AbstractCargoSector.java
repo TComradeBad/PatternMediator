@@ -8,6 +8,8 @@ package PatternMediator.resources.classes.CargoSectors;
 import PatternMediator.resources.enums.CargoSectorTypes;
 import PatternMediator.resources.interfaces.Cargo;
 import PatternMediator.resources.interfaces.CargoSector;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -31,6 +33,11 @@ public abstract class AbstractCargoSector implements CargoSector {
     private CargoSectorTypes type;
 
     /**
+     * Cargo inside sector
+     */
+    private List<Cargo> loadedCargo;
+
+    /**
      * Sector Constructor
      *
      * @param space
@@ -38,6 +45,7 @@ public abstract class AbstractCargoSector implements CargoSector {
      */
     public AbstractCargoSector(Integer space, CargoSectorTypes type) {
 
+        this.loadedCargo = new ArrayList<>();
         this.TotalSpace = space;
         this.UsedSpace = 0;
         this.type = type;
@@ -63,13 +71,24 @@ public abstract class AbstractCargoSector implements CargoSector {
     @Override
     public boolean loadCargo(Cargo cargo) {
 
-        if (this.checkCargo(cargo) && this.TotalSpace >= cargo.getCargoSize()) {
-            this.UsedSpace = cargo.getCargoSize();
+        if (this.checkCargo(cargo) && (this.getFreeSpace()) >= cargo.getCargoSize()) {
+            this.UsedSpace = this.UsedSpace + cargo.getCargoSize();
+            this.loadedCargo.add(cargo);
             return true;
         } else {
             return false;
         }
 
+    }
+
+    /**
+     * Remove Cargo from sector
+     *
+     * @param cargo
+     */
+    public void unloadCargo(Cargo cargo) {
+        this.loadedCargo.remove(cargo);
+        this.UsedSpace = this.UsedSpace - cargo.getCargoSize();
     }
 
     /**
@@ -90,6 +109,15 @@ public abstract class AbstractCargoSector implements CargoSector {
     @Override
     public Integer getUsedSpace() {
         return this.UsedSpace;
+    }
+
+    /**
+     * Calculate free space
+     *
+     * @return
+     */
+    public Integer getFreeSpace() {
+        return this.TotalSpace - this.UsedSpace;
     }
 
     /**
