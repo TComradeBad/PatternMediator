@@ -8,6 +8,7 @@ package PatternMediator.resources.classes.Cargos;
 import PatternMediator.resources.enums.CargoTypes;
 import PatternMediator.resources.interfaces.Airport;
 import PatternMediator.resources.interfaces.Cargo;
+import PatternMediator.resources.interfaces.Mediator;
 
 /**
  *
@@ -15,6 +16,10 @@ import PatternMediator.resources.interfaces.Cargo;
  */
 public abstract class AbstractCargo implements Cargo {
 
+    /**
+     * Current Mediator
+     */
+    private final Mediator mediator;
     /**
      * Cargo destination
      */
@@ -36,7 +41,8 @@ public abstract class AbstractCargo implements Cargo {
      * @param type
      * @param size
      */
-    public AbstractCargo(CargoTypes type, Integer size, Airport destination) {
+    public AbstractCargo(Mediator mediator, CargoTypes type, Integer size, Airport destination) {
+        this.mediator = mediator;
         this.type = type;
         this.size = size;
         this.destination = destination;

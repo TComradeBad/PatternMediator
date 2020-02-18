@@ -6,6 +6,12 @@
 package PatternMediator.resources.classes.LoadMaster;
 
 import PatternMediator.resources.classes.Airports.AirPortImpl;
+import PatternMediator.resources.classes.Airships.ConwingL16;
+import PatternMediator.resources.classes.Airships.Enterprise;
+import PatternMediator.resources.classes.Airships.Medivac;
+import PatternMediator.resources.classes.Airships.MillenniumFalcon;
+import PatternMediator.resources.classes.Airships.Tardis;
+import PatternMediator.resources.classes.Airships.TeslaAS;
 import PatternMediator.resources.classes.Cargos.DangerCargo;
 import PatternMediator.resources.classes.Cargos.DefaultCargo;
 import PatternMediator.resources.classes.Cargos.LivingCargo;
@@ -29,15 +35,15 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author comrade
  */
 public class LoadMasterTest {
-
+    
     private LoadMaster loadMaster;
-
+    
     private static List<Airport> airports = new ArrayList<>();
-
+    
     public LoadMasterTest() {
-
+        
     }
-
+    
     @BeforeAll
     public static void setUpClass() {
         Airport[] airportsl = {
@@ -47,9 +53,9 @@ public class LoadMasterTest {
             new AirPortImpl("Norilsk")
         };
         LoadMasterTest.airports.addAll(Arrays.asList(airportsl));
-
+        
     }
-
+    
     @AfterAll
     public static void tearDownClass() {
     }
@@ -60,16 +66,29 @@ public class LoadMasterTest {
     @BeforeEach
     public void setUp() {
 
+        //Add Cargos
         Cargo[] cargos = {
-            new DangerCargo(LoadMasterTest.airports.get(0), 4),
-            new LivingCargo(LoadMasterTest.airports.get(1), 6),
-            new DefaultCargo(LoadMasterTest.airports.get(2), 3),
-            new PerishableCargo(LoadMasterTest.airports.get(3), 12)
+            new DangerCargo(this.loadMaster, LoadMasterTest.airports.get(0), 4),
+            new LivingCargo(this.loadMaster, LoadMasterTest.airports.get(1), 6),
+            new DefaultCargo(this.loadMaster, LoadMasterTest.airports.get(2), 3),
+            new PerishableCargo(this.loadMaster, LoadMasterTest.airports.get(3), 12)
         };
         this.loadMaster = new LoadMaster();
         this.loadMaster.addCargoGroup(Arrays.asList(cargos));
-    }
 
+        //Add Airships
+        Airship[] airships = {
+            new ConwingL16(this.loadMaster, LoadMasterTest.airports.get(0)),
+            new Enterprise(this.loadMaster, LoadMasterTest.airports.get(0)),
+            new Medivac(this.loadMaster, LoadMasterTest.airports.get(0)),
+            new MillenniumFalcon(this.loadMaster, LoadMasterTest.airports.get(0)),
+            new Tardis(this.loadMaster, LoadMasterTest.airports.get(0)),
+            new TeslaAS(this.loadMaster, LoadMasterTest.airports.get(0))
+        
+        };
+        this.loadMaster.addAirshipGroup(Arrays.asList(airships));
+    }
+    
     @AfterEach
     public void tearDown() {
     }
@@ -79,7 +98,7 @@ public class LoadMasterTest {
      */
     @Test
     public void testAddAirship() {
-
+        
     }
 
     /**
@@ -87,7 +106,7 @@ public class LoadMasterTest {
      */
     @Test
     public void testAddAirshipGroup() {
-
+        
     }
 
     /**
@@ -95,7 +114,7 @@ public class LoadMasterTest {
      */
     @Test
     public void testAddCargo() {
-
+        
     }
 
     /**
@@ -103,7 +122,7 @@ public class LoadMasterTest {
      */
     @Test
     public void testAddCargoGroup() {
-
+        
     }
 
     /**
@@ -111,7 +130,7 @@ public class LoadMasterTest {
      */
     @Test
     public void testAirshipArrived() {
-
+        
     }
 
     /**
@@ -119,7 +138,7 @@ public class LoadMasterTest {
      */
     @Test
     public void testCargoArrived() {
-
+        
     }
 
     /**
@@ -127,7 +146,7 @@ public class LoadMasterTest {
      */
     @Test
     public void testFindAirshipforCargo() {
-
+        
     }
 
     /**
@@ -135,7 +154,7 @@ public class LoadMasterTest {
      */
     @Test
     public void testFindCargoforAirship() {
-
+        
     }
 
     /**
@@ -143,7 +162,7 @@ public class LoadMasterTest {
      */
     @Test
     public void testLoadQueues() {
-
+        
     }
 
     /**
@@ -152,13 +171,13 @@ public class LoadMasterTest {
     @Test
     public void testSortCargoQueues() {
         Integer[] expected = {4, 3, 2, 1};
-        this.loadMaster.sortCargoQueue();
+        this.loadMaster.sortCargo(this.loadMaster.getCargosQueue());
         List<Integer> result = new ArrayList<>();
-
+        
         for (Cargo cargo : this.loadMaster.getCargosQueue()) {
             result.add(cargo.getCargoType().getPriority());
         }
         assertArrayEquals(expected, result.toArray());
     }
-
+    
 }

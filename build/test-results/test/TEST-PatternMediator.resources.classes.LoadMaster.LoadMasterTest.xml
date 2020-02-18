@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="PatternMediator.resources.classes.LoadMaster.LoadMasterTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2020-02-17T14:48:44" hostname="comrade-Lenovo-ideapad-330-15ARR" time="0.049">
+<testsuite name="PatternMediator.resources.classes.LoadMaster.LoadMasterTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2020-02-18T16:06:18" hostname="comrade-Lenovo-ideapad-330-15ARR" time="0.064">
   <properties/>
-  <testcase name="testFindAirshipforCargo()" classname="PatternMediator.resources.classes.LoadMaster.LoadMasterTest" time="0.014"/>
+  <testcase name="testFindAirshipforCargo()" classname="PatternMediator.resources.classes.LoadMaster.LoadMasterTest" time="0.025"/>
   <testcase name="testLoadQueues()" classname="PatternMediator.resources.classes.LoadMaster.LoadMasterTest" time="0.001"/>
   <testcase name="testSortCargoQueues()" classname="PatternMediator.resources.classes.LoadMaster.LoadMasterTest" time="0.012"/>
-  <testcase name="testAddCargo()" classname="PatternMediator.resources.classes.LoadMaster.LoadMasterTest" time="0.001"/>
-  <testcase name="testFindCargoforAirship()" classname="PatternMediator.resources.classes.LoadMaster.LoadMasterTest" time="0.001"/>
-  <testcase name="testAddAirship()" classname="PatternMediator.resources.classes.LoadMaster.LoadMasterTest" time="0.001"/>
-  <testcase name="testAirshipArrived()" classname="PatternMediator.resources.classes.LoadMaster.LoadMasterTest" time="0.001"/>
-  <testcase name="testCargoArrived()" classname="PatternMediator.resources.classes.LoadMaster.LoadMasterTest" time="0.001"/>
+  <testcase name="testAddCargo()" classname="PatternMediator.resources.classes.LoadMaster.LoadMasterTest" time="0.002"/>
+  <testcase name="testFindCargoforAirship()" classname="PatternMediator.resources.classes.LoadMaster.LoadMasterTest" time="0.002"/>
+  <testcase name="testAddAirship()" classname="PatternMediator.resources.classes.LoadMaster.LoadMasterTest" time="0.002"/>
+  <testcase name="testAirshipArrived()" classname="PatternMediator.resources.classes.LoadMaster.LoadMasterTest" time="0.002"/>
+  <testcase name="testCargoArrived()" classname="PatternMediator.resources.classes.LoadMaster.LoadMasterTest" time="0.002"/>
   <testcase name="testAddCargoGroup()" classname="PatternMediator.resources.classes.LoadMaster.LoadMasterTest" time="0.001"/>
-  <testcase name="testAddAirshipGroup()" classname="PatternMediator.resources.classes.LoadMaster.LoadMasterTest" time="0.001"/>
+  <testcase name="testAddAirshipGroup()" classname="PatternMediator.resources.classes.LoadMaster.LoadMasterTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

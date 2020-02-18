@@ -20,11 +20,11 @@ import java.util.Objects;
  * @author comrade
  */
 public class LoadMaster implements Mediator {
-
+    
     private List<Airship> airshipsQueue;
-
+    
     private List<Cargo> cargosQueue;
-
+    
     public LoadMaster() {
         this.airshipsQueue = new ArrayList<>();
         this.cargosQueue = new ArrayList<>();
@@ -88,9 +88,11 @@ public class LoadMaster implements Mediator {
      */
     public void airshipArrived(Airship airship) {
         this.addAirship(airship);
-        Cargo cargo = this.findCargoforAirship(airship);
-        if (!Objects.isNull(cargo)) {
-
+        List<Cargo> cargos = this.findCargosforAirship(airship);
+        if (cargos.size() > 0) {
+            for (Cargo cargo : cargos) {
+                
+            }
         }
     }
 
@@ -100,10 +102,14 @@ public class LoadMaster implements Mediator {
      */
     public void cargoArrived(Cargo cargo) {
         this.addCargo(cargo);
-        this.sortCargoQueue();
-        Airship airship = this.findAirshipforCargo(cargo);
-        if (!Objects.isNull(airship)) {
-
+        this.sortCargo(this.cargosQueue);
+        List<Airship> airships = this.findAirshipsforCargo(cargo);
+        if (airships.size() > 0) {
+            for (Airship airship : airships) {
+                if (!this.loadCargoToAirship(cargo, airship)) {
+                    this.cargosQueue.add(cargo);
+                }
+            }
         }
     }
 
@@ -112,16 +118,15 @@ public class LoadMaster implements Mediator {
      * @param cargo
      * @return
      */
-    public Airship findAirshipforCargo(Cargo cargo) {
-        Airship result = null;
+    public List<Airship> findAirshipsforCargo(Cargo cargo) {
+        List<Airship> result = new ArrayList<>();
         for (Airship airship : this.airshipsQueue) {
-            if (airship.getDestination() == cargo.getDestination()) {
-                result = airship;
-                break;
+            if (airship.getDestination() == cargo.getDestination() && airship.checkCargo(cargo)) {
+                result.add(airship);
             }
         }
         return result;
-
+        
     }
 
     /**
@@ -129,23 +134,14 @@ public class LoadMaster implements Mediator {
      * @param airship
      * @return
      */
-    public Cargo findCargoforAirship(Airship airship) {
-        Cargo result = null;
+    public List<Cargo> findCargosforAirship(Airship airship) {
+        List<Cargo> result = new ArrayList<>();
         for (Cargo cargo : this.cargosQueue) {
-            if (airship.getDestination() == cargo.getDestination()) {
-                result = cargo;
-                break;
+            if (airship.getDestination() == cargo.getDestination() && airship.checkCargo(cargo)) {
+                result.add(cargo);
             }
         }
         return result;
-    }
-
-    /**
-     *
-     */
-    public void loadQueues() {
-        this.sortCargoQueue();
-
     }
 
     /**
@@ -156,20 +152,53 @@ public class LoadMaster implements Mediator {
      */
     public boolean loadCargoToAirship(Cargo cargo, Airship airship) {
         boolean result = false;
+        
+        List<Cargo> throwedCargos = new ArrayList<>();
         List<CargoSector> cargoSectors = airship.getSectors();
         for (CargoSector sector : cargoSectors) {
-            if (sector.loadCargo(cargo)) {
+            
+            if (sector.checkCargo(cargo)) {
+                throwedCargos.addAll(replaceCargosByPriority(cargo, sector));
+            }
+            if (!throwedCargos.contains(cargo)) {
                 result = true;
                 break;
             }
+            
+        }
+        
+        for (Cargo item : throwedCargos) {
+            this.cargoArrived(item);
         }
         return result;
     }
 
     /**
-     * Sort Cargo Queue by priority
+     *
+     * @param cargo
+     * @param sector
+     * @return
      */
-    public void sortCargoQueue() {
-        this.cargosQueue.sort((Cargo o1, Cargo o2) -> o2.getCargoType().getPriority() - o1.getCargoType().getPriority());
+    public List<Cargo> replaceCargosByPriority(Cargo cargo, CargoSector sector) {
+        List<Cargo> throwedCargos = new ArrayList<>();
+        List<Cargo> cargos = sector.freeCargoSector();
+        cargos.add(cargo);
+        this.sortCargo(cargos);
+        for (Cargo item : cargos) {
+            if (!sector.loadCargo(item)) {
+                throwedCargos.add(item);
+            }
+        }
+        
+        return throwedCargos;
+    }
+
+    /**
+     * Sort Cargo Queue by priority
+     *
+     * @param cargos
+     */
+    public void sortCargo(List<? extends Cargo> cargos) {
+        cargos.sort((Cargo o1, Cargo o2) -> o2.getCargoType().getPriority() - o1.getCargoType().getPriority());
     }
 }

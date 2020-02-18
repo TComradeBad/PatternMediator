@@ -9,6 +9,7 @@ import PatternMediator.resources.enums.CargoSectorTypes;
 import PatternMediator.resources.interfaces.Cargo;
 import PatternMediator.resources.interfaces.CargoSector;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -62,6 +63,16 @@ public abstract class AbstractCargoSector implements CargoSector {
     }
 
     /**
+     * Get list of sector's cargos
+     *
+     * @return
+     */
+    @Override
+    public List<Cargo> getLoadedCargos() {
+        return this.loadedCargo;
+    }
+
+    /**
      * Add Cargo into Sector
      *
      *
@@ -85,10 +96,13 @@ public abstract class AbstractCargoSector implements CargoSector {
      * Remove Cargo from sector
      *
      * @param cargo
+     * @return
      */
-    public void unloadCargo(Cargo cargo) {
+    @Override
+    public Cargo unloadCargo(Cargo cargo) {
         this.loadedCargo.remove(cargo);
         this.UsedSpace = this.UsedSpace - cargo.getCargoSize();
+        return cargo;
     }
 
     /**
@@ -121,11 +135,25 @@ public abstract class AbstractCargoSector implements CargoSector {
     }
 
     /**
+     * free all Cargos and return is to user
+     *
+     * @return
+     */
+    @Override
+    public List<Cargo> freeCargoSector() {
+
+        List<Cargo> cargos = Arrays.asList(this.loadedCargo.toArray(Cargo[]::new));
+        this.loadedCargo.clear();
+        return cargos;
+    }
+
+    /**
      * Check if Sector can contain cargo
      *
      * @param cargo
      * @return
      */
+    @Override
     public abstract boolean checkCargo(Cargo cargo);
 
 }

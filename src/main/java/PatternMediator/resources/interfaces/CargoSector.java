@@ -6,20 +6,27 @@
 package PatternMediator.resources.interfaces;
 
 import PatternMediator.resources.enums.CargoSectorTypes;
+import java.util.List;
 
 /**
  *
  * @author comrade
  */
 public interface CargoSector {
-    
+
     public CargoSectorTypes getCargoSectorType();
-    
+
     public boolean loadCargo(Cargo cargo);
-    
+
+    public Cargo unloadCargo(Cargo cargo);
+
     public Integer getTotalSpace();
-    
+
     public Integer getUsedSpace();
-    
+
     public boolean checkCargo(Cargo cargo);
-} 
+
+    public List<Cargo> getLoadedCargos();
+
+    public List<Cargo> freeCargoSector();
+}
