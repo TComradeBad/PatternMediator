@@ -10,5 +10,9 @@ package PatternMediator.resources.interfaces;
  * @author comrade
  */
 public interface Mediator {
-    
+
+    public void cargoArrived(Cargo cargo);
+
+    public void airshipArrived(Airship airship);
+
 }

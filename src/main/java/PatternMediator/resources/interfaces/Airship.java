@@ -18,5 +18,7 @@ public interface Airship {
     public List<CargoSector> getSectors();
 
     public boolean checkCargo(Cargo cargo);
+    
+    public void airshipArrived();
 
 }

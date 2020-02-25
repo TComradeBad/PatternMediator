@@ -3,7 +3,7 @@ apply plugin: 'jacoco'
 apply plugin: 'application'
 
 
-mainClassName = 'JavaCollections.Main'
+mainClassName = 'PatternMediator.Main'
 
 repositories {
     mavenCentral()

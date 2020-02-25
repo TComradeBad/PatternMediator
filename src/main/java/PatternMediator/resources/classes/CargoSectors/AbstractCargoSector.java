@@ -9,7 +9,7 @@ import PatternMediator.resources.enums.CargoSectorTypes;
 import PatternMediator.resources.interfaces.Cargo;
 import PatternMediator.resources.interfaces.CargoSector;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -21,7 +21,7 @@ public abstract class AbstractCargoSector implements CargoSector {
     /**
      * Total space that have sector
      */
-    private Integer TotalSpace;
+    private final Integer TotalSpace;
 
     /**
      * Used space in Cargo
@@ -31,12 +31,12 @@ public abstract class AbstractCargoSector implements CargoSector {
     /**
      * Cargo Sector Type
      */
-    private CargoSectorTypes type;
+    private final CargoSectorTypes type;
 
     /**
      * Cargo inside sector
      */
-    private List<Cargo> loadedCargo;
+    private final List<Cargo> loadedCargo;
 
     /**
      * Sector Constructor
@@ -82,7 +82,7 @@ public abstract class AbstractCargoSector implements CargoSector {
     @Override
     public boolean loadCargo(Cargo cargo) {
 
-        if (this.checkCargo(cargo) && (this.getFreeSpace()) >= cargo.getCargoSize()) {
+        if (this.checkCargo(cargo) && (this.getFreeSpace() >= cargo.getCargoSize())) {
             this.UsedSpace = this.UsedSpace + cargo.getCargoSize();
             this.loadedCargo.add(cargo);
             return true;
@@ -131,7 +131,7 @@ public abstract class AbstractCargoSector implements CargoSector {
      * @return
      */
     public Integer getFreeSpace() {
-        return this.TotalSpace - this.UsedSpace;
+        return (this.TotalSpace - this.UsedSpace);
     }
 
     /**
@@ -142,18 +142,11 @@ public abstract class AbstractCargoSector implements CargoSector {
     @Override
     public List<Cargo> freeCargoSector() {
 
-        List<Cargo> cargos = Arrays.asList(this.loadedCargo.toArray(Cargo[]::new));
+        List<Cargo> cargos = new ArrayList<>();
+        Collections.copy(cargos, this.loadedCargo);
         this.loadedCargo.clear();
         return cargos;
     }
 
-    /**
-     * Check if Sector can contain cargo
-     *
-     * @param cargo
-     * @return
-     */
-    @Override
-    public abstract boolean checkCargo(Cargo cargo);
-
+  
 }

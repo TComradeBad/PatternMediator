@@ -42,7 +42,7 @@ public abstract class AbstractAirship implements Airship {
      * @param destination
      * @param sectors
      */
-    public AbstractAirship(Mediator mediator, Airport destination, CargoSector... sectors) {
+    protected AbstractAirship(Mediator mediator, Airport destination, CargoSector... sectors) {
         this.destination = destination;
         this.mediator = mediator;
         this.sectors = new ArrayList<>();
@@ -64,14 +64,16 @@ public abstract class AbstractAirship implements Airship {
      *
      * @return
      */
+    @Override
     public List<CargoSector> getSectors() {
         return this.sectors;
     }
 
     /**
      * Check cargo by airship
+     *
      * @param cargo
-     * @return 
+     * @return
      */
     @Override
     public boolean checkCargo(Cargo cargo) {
@@ -84,5 +86,13 @@ public abstract class AbstractAirship implements Airship {
         }
         return result;
     }
-
+    
+    /**
+     * Mediator airship Event
+     */
+    @Override
+    public void airshipArrived() {
+        this.mediator.airshipArrived(this);
+    }
+    
 }

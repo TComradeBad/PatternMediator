@@ -21,8 +21,8 @@ public class Enterprise extends AbstractAirship implements Airship {
         super(
                 mediator,
                 destination,
-                new TemperatureControlSector(20),
-                new GermeticSector(30)
+                new GermeticSector(30),
+                new TemperatureControlSector(20)
         );
     }
 }

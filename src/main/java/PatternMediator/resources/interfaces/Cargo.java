@@ -12,10 +12,12 @@ import PatternMediator.resources.enums.CargoTypes;
  * @author comrade
  */
 public interface Cargo {
-    
+
     public CargoTypes getCargoType();
-    
+
     public Integer getCargoSize();
-    
+
     public Airport getDestination();
+
+    public void cargoArrived();
 }

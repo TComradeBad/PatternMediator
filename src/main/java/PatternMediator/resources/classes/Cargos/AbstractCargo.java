@@ -23,23 +23,25 @@ public abstract class AbstractCargo implements Cargo {
     /**
      * Cargo destination
      */
-    private Airport destination;
+    private final Airport destination;
 
     /**
      * Cargo type
      */
-    private CargoTypes type;
+    private final CargoTypes type;
 
     /**
      * Size of cargo
      */
-    private Integer size;
+    private final Integer size;
 
     /**
      * Cargo Constructor
      *
+     * @param mediator
      * @param type
      * @param size
+     * @param destination
      */
     public AbstractCargo(Mediator mediator, CargoTypes type, Integer size, Airport destination) {
         this.mediator = mediator;
@@ -77,4 +79,13 @@ public abstract class AbstractCargo implements Cargo {
     public Airport getDestination() {
         return this.destination;
     }
+
+    /**
+     * Mediator Cargo Event
+     */
+    @Override
+    public void cargoArrived() {
+        this.mediator.cargoArrived(this);
+    }
+
 }

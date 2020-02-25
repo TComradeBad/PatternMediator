@@ -7,7 +7,6 @@ package PatternMediator.resources.classes.CargoSectors;
 
 import PatternMediator.resources.interfaces.CargoSector;
 import PatternMediator.resources.enums.CargoSectorTypes;
-import PatternMediator.resources.enums.CargoTypes;
 import PatternMediator.resources.interfaces.Cargo;
 
 /**
@@ -29,7 +28,31 @@ public class DefaultSector extends AbstractCargoSector implements CargoSector {
     @Override
     public boolean checkCargo(Cargo cargo) {
 
-        return true;
+        boolean result = false;
+
+        switch (cargo.getCargoType()) {
+
+            case Default:
+                result = true;
+                break;
+
+            case Living:
+                result = false;
+                break;
+
+            case Danger:
+                result = true;
+                break;
+
+            case Perishable:
+                result = false;
+                break;
+
+            default:
+                result = false;
+                break;
+        }
+        return result;
     }
 
 }

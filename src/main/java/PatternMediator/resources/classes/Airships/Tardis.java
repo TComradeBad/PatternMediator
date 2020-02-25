@@ -21,10 +21,10 @@ public class Tardis extends AbstractAirship implements Airship {
     public Tardis(Mediator mediator, Airport destination) {
         super(
                 mediator,
-                destination,
-                new DefaultSector(9999),
+                destination,                
                 new GermeticSector(9999),
-                new TemperatureControlSector(9999)
+                new TemperatureControlSector(9999),
+                new DefaultSector(9999)
         );
     }
 }

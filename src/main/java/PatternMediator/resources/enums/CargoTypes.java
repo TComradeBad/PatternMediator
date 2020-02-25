@@ -16,7 +16,7 @@ public enum CargoTypes {
     Danger(2),
     Default(1);
 
-    private Integer priority;
+    private final Integer priority;
 
     public Integer getPriority() {
         return this.priority;

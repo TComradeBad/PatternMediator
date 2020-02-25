@@ -20,11 +20,11 @@ import java.util.Objects;
  * @author comrade
  */
 public class LoadMaster implements Mediator {
-    
-    private List<Airship> airshipsQueue;
-    
-    private List<Cargo> cargosQueue;
-    
+
+    private final List<Airship> airshipsQueue;
+
+    private final List<Cargo> cargosQueue;
+
     public LoadMaster() {
         this.airshipsQueue = new ArrayList<>();
         this.cargosQueue = new ArrayList<>();
@@ -86,12 +86,17 @@ public class LoadMaster implements Mediator {
      *
      * @param airship
      */
+    @Override
     public void airshipArrived(Airship airship) {
         this.addAirship(airship);
         List<Cargo> cargos = this.findCargosforAirship(airship);
-        if (cargos.size() > 0) {
-            for (Cargo cargo : cargos) {
-                
+        this.sortCargo(cargos);
+        
+        for (Cargo cargo : cargos) {
+            if (this.loadCargoToAirship(cargo, airship)) {
+                this.cargosQueue.remove(cargo);
+                break;
+
             }
         }
     }
@@ -100,15 +105,17 @@ public class LoadMaster implements Mediator {
      *
      * @param cargo
      */
+    @Override
     public void cargoArrived(Cargo cargo) {
         this.addCargo(cargo);
         this.sortCargo(this.cargosQueue);
         List<Airship> airships = this.findAirshipsforCargo(cargo);
-        if (airships.size() > 0) {
-            for (Airship airship : airships) {
-                if (!this.loadCargoToAirship(cargo, airship)) {
-                    this.cargosQueue.add(cargo);
-                }
+
+        for (Airship airship : airships) {
+            if (this.loadCargoToAirship(cargo, airship)) {
+                this.cargosQueue.remove(cargo);
+                break;
+
             }
         }
     }
@@ -126,7 +133,7 @@ public class LoadMaster implements Mediator {
             }
         }
         return result;
-        
+
     }
 
     /**
@@ -152,24 +159,28 @@ public class LoadMaster implements Mediator {
      */
     public boolean loadCargoToAirship(Cargo cargo, Airship airship) {
         boolean result = false;
-        
+
         List<Cargo> throwedCargos = new ArrayList<>();
-        List<CargoSector> cargoSectors = airship.getSectors();
-        for (CargoSector sector : cargoSectors) {
-            
+
+        for (CargoSector sector : airship.getSectors()) {
+
             if (sector.checkCargo(cargo)) {
                 throwedCargos.addAll(replaceCargosByPriority(cargo, sector));
-            }
+            } else continue;
             if (!throwedCargos.contains(cargo)) {
                 result = true;
                 break;
+            } else {
+                throwedCargos.remove(cargo);
             }
-            
         }
-        
+
         for (Cargo item : throwedCargos) {
-            this.cargoArrived(item);
+            if (!Objects.equals(cargo, item)) {
+                item.cargoArrived();
+            }
         }
+
         return result;
     }
 
@@ -189,7 +200,7 @@ public class LoadMaster implements Mediator {
                 throwedCargos.add(item);
             }
         }
-        
+
         return throwedCargos;
     }
 

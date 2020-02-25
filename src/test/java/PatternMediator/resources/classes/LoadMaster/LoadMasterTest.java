@@ -19,9 +19,11 @@ import PatternMediator.resources.classes.Cargos.PerishableCargo;
 import PatternMediator.resources.interfaces.Airport;
 import PatternMediator.resources.interfaces.Airship;
 import PatternMediator.resources.interfaces.Cargo;
+import PatternMediator.resources.interfaces.CargoSector;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
+
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -35,15 +37,15 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author comrade
  */
 public class LoadMasterTest {
-    
+
     private LoadMaster loadMaster;
-    
-    private static List<Airport> airports = new ArrayList<>();
-    
+
+    private static final List<Airport> airports = new ArrayList<>();
+
     public LoadMasterTest() {
-        
+
     }
-    
+
     @BeforeAll
     public static void setUpClass() {
         Airport[] airportsl = {
@@ -53,9 +55,9 @@ public class LoadMasterTest {
             new AirPortImpl("Norilsk")
         };
         LoadMasterTest.airports.addAll(Arrays.asList(airportsl));
-        
+
     }
-    
+
     @AfterAll
     public static void tearDownClass() {
     }
@@ -65,30 +67,17 @@ public class LoadMasterTest {
      */
     @BeforeEach
     public void setUp() {
-
-        //Add Cargos
-        Cargo[] cargos = {
-            new DangerCargo(this.loadMaster, LoadMasterTest.airports.get(0), 4),
-            new LivingCargo(this.loadMaster, LoadMasterTest.airports.get(1), 6),
-            new DefaultCargo(this.loadMaster, LoadMasterTest.airports.get(2), 3),
-            new PerishableCargo(this.loadMaster, LoadMasterTest.airports.get(3), 12)
-        };
         this.loadMaster = new LoadMaster();
-        this.loadMaster.addCargoGroup(Arrays.asList(cargos));
 
         //Add Airships
-        Airship[] airships = {
-            new ConwingL16(this.loadMaster, LoadMasterTest.airports.get(0)),
-            new Enterprise(this.loadMaster, LoadMasterTest.airports.get(0)),
-            new Medivac(this.loadMaster, LoadMasterTest.airports.get(0)),
-            new MillenniumFalcon(this.loadMaster, LoadMasterTest.airports.get(0)),
-            new Tardis(this.loadMaster, LoadMasterTest.airports.get(0)),
-            new TeslaAS(this.loadMaster, LoadMasterTest.airports.get(0))
-        
+        Airship[] airships = {new Medivac(this.loadMaster, LoadMasterTest.airports.get(0)),
+            new TeslaAS(this.loadMaster, LoadMasterTest.airports.get(0)),
+            
+            new Tardis(this.loadMaster, LoadMasterTest.airports.get(0))
         };
         this.loadMaster.addAirshipGroup(Arrays.asList(airships));
     }
-    
+
     @AfterEach
     public void tearDown() {
     }
@@ -98,7 +87,7 @@ public class LoadMasterTest {
      */
     @Test
     public void testAddAirship() {
-        
+
     }
 
     /**
@@ -106,7 +95,7 @@ public class LoadMasterTest {
      */
     @Test
     public void testAddAirshipGroup() {
-        
+
     }
 
     /**
@@ -114,7 +103,7 @@ public class LoadMasterTest {
      */
     @Test
     public void testAddCargo() {
-        
+
     }
 
     /**
@@ -122,7 +111,7 @@ public class LoadMasterTest {
      */
     @Test
     public void testAddCargoGroup() {
-        
+
     }
 
     /**
@@ -130,7 +119,7 @@ public class LoadMasterTest {
      */
     @Test
     public void testAirshipArrived() {
-        
+
     }
 
     /**
@@ -138,7 +127,29 @@ public class LoadMasterTest {
      */
     @Test
     public void testCargoArrived() {
-        
+        Cargo cargo = new LivingCargo(this.loadMaster, LoadMasterTest.airports.get(0), 13);
+
+        cargo.cargoArrived();
+
+        int expectedIndex = -2;
+        boolean result = false;
+        Airship ar = null;
+        for (Airship airship : this.loadMaster.getAirshipQueue()) {
+            for (CargoSector sector : airship.getSectors()) {
+                if (sector.getLoadedCargos().contains(cargo)) {
+                    result = true;
+                    ar = airship;
+                    break;
+                }
+
+            }
+        }
+
+        assertTrue(result);
+
+        if (result) {
+            assertEquals(ar.getClass(), Medivac.class);
+        }
     }
 
     /**
@@ -146,7 +157,7 @@ public class LoadMasterTest {
      */
     @Test
     public void testFindAirshipforCargo() {
-        
+
     }
 
     /**
@@ -154,7 +165,7 @@ public class LoadMasterTest {
      */
     @Test
     public void testFindCargoforAirship() {
-        
+
     }
 
     /**
@@ -162,22 +173,70 @@ public class LoadMasterTest {
      */
     @Test
     public void testLoadQueues() {
-        
+
     }
 
     /**
-     * Test of sortCargoQueues method, of class LoadMaster.
+     * Test of getCargosQueue method, of class LoadMaster.
      */
     @Test
-    public void testSortCargoQueues() {
+    public void testGetCargosQueue() {
+
+    }
+
+    /**
+     * Test of getAirshipQueue method, of class LoadMaster.
+     */
+    @Test
+    public void testGetAirshipQueue() {
+
+    }
+
+    /**
+     * Test of findAirshipsforCargo method, of class LoadMaster.
+     */
+    @Test
+    public void testFindAirshipsforCargo() {
+
+    }
+
+    /**
+     * Test of findCargosforAirship method, of class LoadMaster.
+     */
+    @Test
+    public void testFindCargosforAirship() {
+
+    }
+
+    /**
+     * Test of loadCargoToAirship method, of class LoadMaster.
+     */
+    @Test
+    public void testLoadCargoToAirship() {
+
+    }
+
+    /**
+     * Test of replaceCargosByPriority method, of class LoadMaster.
+     */
+    @Test
+    public void testReplaceCargosByPriority() {
+
+    }
+
+    /**
+     * Test of sortCargo method, of class LoadMaster.
+     */
+    @Test
+    public void testSortCargo() {
         Integer[] expected = {4, 3, 2, 1};
         this.loadMaster.sortCargo(this.loadMaster.getCargosQueue());
         List<Integer> result = new ArrayList<>();
-        
+
         for (Cargo cargo : this.loadMaster.getCargosQueue()) {
             result.add(cargo.getCargoType().getPriority());
         }
         assertArrayEquals(expected, result.toArray());
     }
-    
+
 }
