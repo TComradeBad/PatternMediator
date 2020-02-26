@@ -22,9 +22,9 @@ public class Tardis extends AbstractAirship implements Airship {
         super(
                 mediator,
                 destination,                
-                new GermeticSector(9999),
-                new TemperatureControlSector(9999),
-                new DefaultSector(9999)
+                new GermeticSector(Integer.MAX_VALUE),
+                new TemperatureControlSector(Integer.MAX_VALUE),
+                new DefaultSector(Integer.MAX_VALUE)
         );
     }
 }

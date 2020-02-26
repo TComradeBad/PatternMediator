@@ -142,9 +142,9 @@ public abstract class AbstractCargoSector implements CargoSector {
     @Override
     public List<Cargo> freeCargoSector() {
 
-        List<Cargo> cargos = new ArrayList<>();
-        Collections.copy(cargos, this.loadedCargo);
+        List<Cargo> cargos = new ArrayList<>(this.loadedCargo);
         this.loadedCargo.clear();
+        this.UsedSpace = 0;
         return cargos;
     }
 

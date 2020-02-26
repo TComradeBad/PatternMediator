@@ -11,7 +11,6 @@ import PatternMediator.resources.interfaces.CargoSector;
 import PatternMediator.resources.interfaces.Mediator;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -95,8 +94,6 @@ public class LoadMaster implements Mediator {
         for (Cargo cargo : cargos) {
             if (this.loadCargoToAirship(cargo, airship)) {
                 this.cargosQueue.remove(cargo);
-                break;
-
             }
         }
     }

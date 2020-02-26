@@ -17,6 +17,6 @@ import PatternMediator.resources.interfaces.Mediator;
 public class ConwingL16 extends AbstractAirship implements Airship {
 
     public ConwingL16(Mediator mediator, Airport destination) {
-        super(mediator, destination, new DefaultSector(6));
+        super(mediator, destination, new DefaultSector(20));
     }
 }
